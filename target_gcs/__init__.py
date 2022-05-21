@@ -202,7 +202,7 @@ def main():
     state = None
     with GCSObjectStreamUpload(client=client, bucket_name=bucket_name, blob_name=blob_name) as s:
         if config.get("singer_format", False):
-            state = process_singer_format(input, s, encoding=encoding)
+            state = process_singer_format(input, s, on_invalid_record="validate", encoding=encoding)
         else:
             process_general(input, s, encoding=encoding)
 
